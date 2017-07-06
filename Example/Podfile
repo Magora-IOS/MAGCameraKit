@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'MAGCameraKit_Example' do
+  pod 'MAGCameraKit', :path => '../'
+
+  target 'MAGCameraKit_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
