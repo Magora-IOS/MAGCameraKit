@@ -1,0 +1,16 @@
+PODS:
+  - MAGCameraKit (0.1.0)
+
+DEPENDENCIES:
+  - MAGCameraKit (from `../`)
+
+EXTERNAL SOURCES:
+  MAGCameraKit:
+    :path: ../
+
+SPEC CHECKSUMS:
+  MAGCameraKit: 0dd269edbdf51ad6996fbf63449248c0d9f891bd
+
+PODFILE CHECKSUM: c09b4db55dc2b37b7fce7ab0e7ec413bffa25e03
+
+COCOAPODS: 1.2.1
