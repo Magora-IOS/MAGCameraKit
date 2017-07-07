@@ -36,5 +36,5 @@ Pod::Spec.new do |s|
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'SCRecorder', :git => 'https://github.com/JoniStep/SCRecorder.git'
+  # s.dependency 'SCRecorder', :git => 'https://github.com/JoniStep/SCRecorder.git'
 end
