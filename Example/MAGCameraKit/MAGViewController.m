@@ -7,13 +7,15 @@
 //
 
 #import "MAGViewController.h"
-#import "ITMediaPicker.h"
+#import "MAGCameraKit.h"
+#import "MAGMediaPickerStrings.h"
+//#import "ITMediaPicker.h"
 
 
 @interface MAGViewController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (strong, nonatomic) ITMediaPicker *mediaPicker;
+@property (strong, nonatomic) MAGMediaPicker *mediaPicker;
 
 @end
 
@@ -23,7 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.mediaPicker = [[ITMediaPicker alloc] initWithVC:self];
+    self.mediaPicker = [[MAGMediaPicker alloc] initWithVC:self];
+    self.mediaPicker.strings = [MAGMediaPickerStrings new];
 }
 
 - (IBAction)captureAction:(id)sender {

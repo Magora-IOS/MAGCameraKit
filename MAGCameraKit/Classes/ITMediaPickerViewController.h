@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "ITMediaPickerPresenter.h"
+#import "MAGMediaPickerStringsProtocol.h"
 
 
 @interface ITMediaPickerViewController : UIViewController
 
 @property (strong, nonatomic) id<ITMediaPickerPresenterProtocol> presenter;
+@property (strong, nonatomic) id<MAGMediaPickerStringsProtocol> strings;
 
 @end

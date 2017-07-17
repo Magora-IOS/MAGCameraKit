@@ -183,6 +183,10 @@
 }
 
 
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 
 #pragma mark - Navigation
 
@@ -190,12 +194,15 @@
     
     if ([segue.identifier isEqualToString:@"Camera"]) {
         self.cameraVC = segue.destinationViewController;
+        self.cameraVC.strings = self.strings;
         
     } else if ([segue.identifier isEqualToString:@"Preview"]) {
         self.previewVC = segue.destinationViewController;
+        self.previewVC.strings = self.strings;
         
     } else if ([segue.identifier isEqualToString:@"Media"]) {
         self.mediaVC = segue.destinationViewController;
+        self.mediaVC.strings = self.strings;
     }
 }
 

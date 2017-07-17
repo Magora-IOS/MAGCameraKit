@@ -24,6 +24,7 @@
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		9BC9938F2DC87BC5EA80E738 /* Pods_MAGCameraKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B0581EF1B60FC579282BA9B /* Pods_MAGCameraKit_Example.framework */; };
+		D65227D21F1CE122009A08FA /* MAGMediaPickerStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = D65227D11F1CE122009A08FA /* MAGMediaPickerStrings.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,8 @@
 		8B0581EF1B60FC579282BA9B /* Pods_MAGCameraKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MAGCameraKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A53D7CB34BA13CFE77BB7723 /* MAGCameraKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MAGCameraKit.podspec; path = ../MAGCameraKit.podspec; sourceTree = "<group>"; };
 		B21E903F6E3906B98817D198 /* Pods-MAGCameraKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MAGCameraKit_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MAGCameraKit_Tests/Pods-MAGCameraKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		D65227D01F1CE122009A08FA /* MAGMediaPickerStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAGMediaPickerStrings.h; sourceTree = "<group>"; };
+		D65227D11F1CE122009A08FA /* MAGMediaPickerStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAGMediaPickerStrings.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +154,8 @@
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
+				D65227D01F1CE122009A08FA /* MAGMediaPickerStrings.h */,
+				D65227D11F1CE122009A08FA /* MAGMediaPickerStrings.m */,
 			);
 			name = "Example for MAGCameraKit";
 			path = MAGCameraKit;
@@ -400,6 +405,7 @@
 				6003F59E195388D20070C39A /* MAGAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* MAGViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				D65227D21F1CE122009A08FA /* MAGMediaPickerStrings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

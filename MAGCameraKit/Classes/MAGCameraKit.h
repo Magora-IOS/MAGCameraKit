@@ -9,7 +9,8 @@
 #ifndef MAGDebugKit_h
 #define MAGDebugKit_h
 
-#import "ITMediaPicker.h"
+#import "MAGMediaPicker.h"
+#import "MAGMediaPickerStrings.h"
 
 
 #endif /* MAGDebugKit_h */

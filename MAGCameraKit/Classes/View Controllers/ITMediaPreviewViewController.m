@@ -47,13 +47,13 @@
     
     self.mediaPlayer = [[ITMediaPlayer alloc] initWithFilterView:self.filterView playerView:self.playerView];
     
-    [self.cancelButton setTitle:NSLocalizedString(@"camera.preview.cancel", @"Retake") forState:UIControlStateNormal];
-    [self.uploadButton setTitle:NSLocalizedString(@"camera.preview.upload", @"Upload") forState:UIControlStateNormal];
+    //[self.cancelButton setTitle:NSLocalizedString(@"camera.preview.cancel", @"Retake") forState:UIControlStateNormal];
+    //[self.uploadButton setTitle:NSLocalizedString(@"camera.preview.upload", @"Upload") forState:UIControlStateNormal];
     
     //[self.retakeButton setImage:nil forState:UIControlStateNormal];
     //[self.retakeButton setTitle:NSLocalizedString(@"camera.preview.cancel", @"Retake") forState:UIControlStateNormal];
     
-    [self showPopButtonsAnimation];
+    //[self showPopButtonsAnimation];
     [self hideCompleteButton];
     
     [self setupTrackShowingTrash];
@@ -95,7 +95,7 @@
     CGSize mediaSize = [recordSession mediaSize];
     [self.editorVC setupContentSize:mediaSize];
     
-    [self showPushButtonsAnimation];
+    //[self showPushButtonsAnimation];
     [self showCompleteButton];
 }
 
@@ -153,7 +153,7 @@
         self.cancelled();
     }
     
-    [self showPopButtonsAnimation];
+    //[self showPopButtonsAnimation];
 }
 
 
@@ -184,14 +184,14 @@
 
 - (IBAction)actionText:(id)sender {
     [self hideTopButtons];
-    [self showPopButtonsAnimation];
+    //[self showPopButtonsAnimation];
     [self hideCompleteButton];
     
     @weakify(self);
     [self.editorVC goTextEdit:^{
         @strongify(self);
         [self showTopButtons];
-        [self showPushButtonsAnimation];
+        //[self showPushButtonsAnimation];
         [self showCompleteButton];
     }];
 }
@@ -199,14 +199,14 @@
 
 - (IBAction)actionPaint:(id)sender {
     [self hideTopButtons];
-    [self showPopButtonsAnimation];
+    //[self showPopButtonsAnimation];
     [self hideCompleteButton];
     
     @weakify(self);
     [self.editorVC goPaintEdit:^{
         @strongify(self);
         [self showTopButtons];
-        [self showPushButtonsAnimation];
+        //[self showPushButtonsAnimation];
         [self showCompleteButton];
     }];
     
@@ -217,19 +217,19 @@
 
 - (IBAction)actionEmoji:(id)sender {
     [self hideTopButtons];
-    [self showPopButtonsAnimation];
+    //[self showPopButtonsAnimation];
     [self hideCompleteButton];
     
     @weakify(self);
     [self.editorVC goEmojiEdit:^{
         @strongify(self);
         [self showTopButtons];
-        [self showPushButtonsAnimation];
+        //[self showPushButtonsAnimation];
         [self showCompleteButton];
     }];
 }
 
-
+/*
 - (void)showPushButtonsAnimation {
     
     CGFloat inset = 10;
@@ -263,7 +263,7 @@
         //
     }];
 }
-
+*/
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     

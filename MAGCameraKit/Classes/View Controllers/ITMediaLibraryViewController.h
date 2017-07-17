@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "ITMediaPickerItem.h"
 #import "ITRecordSession.h"
+#import "MAGMediaPickerStringsProtocol.h"
 
 
 typedef void(^SelectedMediaItem)(ITRecordSession *session);
 
 @interface ITMediaLibraryViewController : UIViewController
 
+@property (strong, nonatomic) id<MAGMediaPickerStringsProtocol> strings;
 @property(copy, nonatomic) SelectedMediaItem selectedMediaItem;
 @property(assign, nonatomic) CGFloat maxVideoDuration;
 

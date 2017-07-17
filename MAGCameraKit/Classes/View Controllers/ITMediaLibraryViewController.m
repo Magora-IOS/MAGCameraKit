@@ -32,8 +32,8 @@ NSInteger const kMaxImageSize = 1920;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.titleLabel.text = NSLocalizedString(@"camera.medialibrary.title", @"Photo and Video");
-    self.noContentLabel.text = NSLocalizedString(@"camera.medialibrary.empty", @"No photo or video");
+    self.titleLabel.text = [self.strings mediaLibraryTitle]; //NSLocalizedString(@"camera.medialibrary.title", @"Photo and Video");
+    self.noContentLabel.text = [self.strings mediaLibraryNoContent]; //NSLocalizedString(@"camera.medialibrary.empty", @"No photo or video");
 }
 
 
@@ -92,11 +92,11 @@ NSInteger const kMaxImageSize = 1920;
 
 - (void)showAlertVideoDurationIsExceed {
     
-    NSString *message = NSLocalizedString(@"camera.medialibrary.exceed", @"Selected video should not exceed %li seconds");
+    NSString *message = [self.strings mediaLibraryAddingExceedSize]; //NSLocalizedString(@"camera.medialibrary.exceed", @"Selected video should not exceed %li seconds");
     message = [NSString stringWithFormat:message, (long)@(self.maxVideoDuration).integerValue];
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *action = [UIAlertAction actionWithTitle:NSLocalizedString(@"alert.ok_button", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *action = [UIAlertAction actionWithTitle:[self.strings mediaLibraryButtonOk] /*NSLocalizedString(@"alert.ok_button", nil)*/ style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //
     }];
     [alert addAction:action];
