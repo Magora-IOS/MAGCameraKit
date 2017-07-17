@@ -30,11 +30,14 @@ Pod::Spec.new do |s|
 
   s.source_files = 'MAGCameraKit/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'MAGCameraKit' => ['MAGCameraKit/Assets/*.png']
-  # }
+  s.resource_bundles = {
+    'MAGCameraKit' => ['MAGCameraKit/Assets/*.png', 'MAGCameraKit/*.storyboard', 'MAGCameraKit/*.xcassets']
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'SCRecorder', :git => 'https://github.com/JoniStep/SCRecorder.git'
+  s.dependency 'libextobjc', '~> 0.4.1'
+  s.dependency 'JPSVolumeButtonHandler', '~> 1.0.4'
+  s.dependency 'SVProgressHUD', '~> 1.1.3'
 end

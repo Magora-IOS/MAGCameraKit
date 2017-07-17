@@ -11,6 +11,7 @@
 
 //#import "RBVolumeButtons.h"
 #import "JPSVolumeButtonHandler.h"
+#import "MAGCameraKitCommon.h"
 
 @interface ITCameraViewController ()
 
@@ -76,14 +77,22 @@
     
     self.camera.flashMode = flasMode;
     
+    //self.flashButton.highlighted = (self.flasMode == ITFlashModeAuto);
+    //self.flashButton.selected = (self.flasMode == ITFlashModeOn);
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    
+    UIImage *imageFlashOff = [UIImage imageNamed:@"FlashOff" inBundle:bundle compatibleWithTraitCollection:nil];
+    UIImage *imageFlashAuto = [UIImage imageNamed:@"FlashAuto" inBundle:bundle compatibleWithTraitCollection:nil];
+    UIImage *imageFlashOn = [UIImage imageNamed:@"FlashOn" inBundle:bundle compatibleWithTraitCollection:nil];
+    
     if (self.flasMode == ITFlashModeOff) {
-        [self.flashButton setImage:[UIImage imageNamed:@"FlashOff"] forState:UIControlStateNormal];
+        [self.flashButton setImage:imageFlashOff forState:UIControlStateNormal];
         
     } else if (self.flasMode == ITFlashModeAuto) {
-        [self.flashButton setImage:[UIImage imageNamed:@"FlashAuto"] forState:UIControlStateNormal];
+        [self.flashButton setImage:imageFlashAuto forState:UIControlStateNormal];
         
     } else if (self.flasMode == ITFlashModeOn) {
-        [self.flashButton setImage:[UIImage imageNamed:@"FlashOn"] forState:UIControlStateNormal];
+        [self.flashButton setImage:imageFlashOn forState:UIControlStateNormal];
     }
 }
 

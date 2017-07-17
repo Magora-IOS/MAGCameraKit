@@ -7,23 +7,32 @@
 //
 
 #import "MAGViewController.h"
+#import "ITMediaPicker.h"
+
 
 @interface MAGViewController ()
 
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) ITMediaPicker *mediaPicker;
+
 @end
+
 
 @implementation MAGViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    self.mediaPicker = [[ITMediaPicker alloc] initWithVC:self];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)captureAction:(id)sender {
+    
+    [self.mediaPicker pickMedia:^(ITMediaPickerItem *item) {
+        if (item.type == ITMediaTypeImage) {
+            self.imageView.image = item.image;
+        }
+    }];
 }
 
 @end

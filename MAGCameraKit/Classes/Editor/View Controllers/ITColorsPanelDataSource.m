@@ -7,7 +7,6 @@
 //
 
 #import "ITColorsPanelDataSource.h"
-#import "UIColor+InTouchColors.h"
 
 
 @interface ITColorsPanelDataSource ()
@@ -29,6 +28,7 @@
 }*/
 
 
+
 - (void)loadItems {
     /*
     self.items = @[[ITPaintColor paintColor:[UIColor blueColor]],
@@ -41,14 +41,14 @@
                    ];
      */
     
-    self.items = @[[ITPaintColor paintColor:ITColorRGB(255, 255, 255)],
-                   [ITPaintColor paintColor:ITColorRGB(0, 186, 255)],
-                   [ITPaintColor paintColor:ITColorRGB(12, 255, 1)],
-                   [ITPaintColor paintColor:ITColorRGB(255, 1, 252)],
-                   [ITPaintColor paintColor:ITColorRGB(238, 28, 37)],
-                   [ITPaintColor paintColor:ITColorRGB(255, 126, 0)],
-                   [ITPaintColor paintColor:ITColorRGB(255, 252, 0)],
-                   [ITPaintColor paintColor:ITColorRGB(0, 0, 0)]
+    self.items = @[[ITPaintColor paintColor:UIColorRGB(255, 255, 255)],
+                   [ITPaintColor paintColor:UIColorRGB(0, 186, 255)],
+                   [ITPaintColor paintColor:UIColorRGB(12, 255, 1)],
+                   [ITPaintColor paintColor:UIColorRGB(255, 1, 252)],
+                   [ITPaintColor paintColor:UIColorRGB(238, 28, 37)],
+                   [ITPaintColor paintColor:UIColorRGB(255, 126, 0)],
+                   [ITPaintColor paintColor:UIColorRGB(255, 252, 0)],
+                   [ITPaintColor paintColor:UIColorRGB(0, 0, 0)]
                    ];
 }
 

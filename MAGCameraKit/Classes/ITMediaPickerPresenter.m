@@ -8,24 +8,21 @@
 
 #import "ITMediaPickerPresenter.h"
 #import <SVProgressHUD/SVProgressHUD.h>
-#import "ITEventsDataProvider.h"
-#import "ITEventInteractor.h"
-#import "UIImage+Additions.h"
-#import "ITAnalyticsManager.h"
-#import "ITHud.h"
-#import "ITEvent.h"
+//#import "ITEventsDataProvider.h"
+//#import "ITEventInteractor.h"
+#import "UIImage+MAGCameraKit.h"
 
 
 @interface ITMediaPickerPresenter ()
 
-@property (strong, nonatomic) ITEventInteractor *eventInteractor;
+//@property (strong, nonatomic) ITEventInteractor *eventInteractor;
 
 @end
 
 
 @implementation ITMediaPickerPresenter
 
-
+/*
 - (void)uploadMedia:(ITMediaPickerItem *)item {
     
     if (item.type == ITMediaTypeImage) {
@@ -72,6 +69,6 @@
         [SVProgressHUD dismiss];
     }];
 }
-
+*/
 
 @end

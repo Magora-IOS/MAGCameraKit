@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hQq-z6-WMt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hQq-z6-WMt">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -177,7 +177,9 @@
                                             <constraint firstAttribute="width" constant="42" id="Y2a-qG-4g7"/>
                                             <constraint firstAttribute="height" constant="42" id="cSw-5C-Ddr"/>
                                         </constraints>
-                                        <state key="normal" image="Flash"/>
+                                        <state key="normal" image="FlashOff"/>
+                                        <state key="selected" image="FlashOn"/>
+                                        <state key="highlighted" image="FlashOn"/>
                                         <connections>
                                             <action selector="actionFlash:" destination="qlM-31-b6X" eventType="touchUpInside" id="1VQ-1M-BcB"/>
                                         </connections>
@@ -217,11 +219,12 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a78-cX-dOK">
-                                        <rect key="frame" x="152" y="647" width="72" height="22"/>
+                                        <rect key="frame" x="172" y="657" width="32" height="12"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="72" id="nsP-kw-dl8"/>
+                                            <constraint firstAttribute="height" constant="12" id="XQF-p6-uZU"/>
+                                            <constraint firstAttribute="width" constant="32" id="nsP-kw-dl8"/>
                                         </constraints>
-                                        <state key="normal" image="Triangle"/>
+                                        <state key="normal" backgroundImage="Triangle"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -345,7 +348,7 @@
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RZf-gc-1uh" customClass="ITTopGrayGradientView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WTS-Yq-5eA" customClass="DarkAcentButton">
+                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WTS-Yq-5eA">
                                         <rect key="frame" x="8" y="24" width="42" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="5je-n1-gJf"/>
@@ -931,11 +934,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Cancel" width="19" height="19"/>
+        <image name="Cancel" width="15" height="15"/>
         <image name="CompleteRoundButton" width="74" height="74"/>
         <image name="DoneMarkButton" width="19" height="13"/>
         <image name="EmojiButton" width="24" height="24"/>
-        <image name="Flash" width="16" height="25"/>
+        <image name="FlashOff" width="14" height="24"/>
+        <image name="FlashOn" width="14" height="24"/>
         <image name="PaintButton" width="23" height="25"/>
         <image name="RecBack" width="81" height="81"/>
         <image name="RecButton" width="70" height="70"/>

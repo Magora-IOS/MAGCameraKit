@@ -1,5 +1,45 @@
 PODS:
-  - MAGCameraKit (0.1.0)
+  - JPSVolumeButtonHandler (1.0.4)
+  - libextobjc (0.4.1):
+    - libextobjc/EXTADT (= 0.4.1)
+    - libextobjc/EXTConcreteProtocol (= 0.4.1)
+    - libextobjc/EXTKeyPathCoding (= 0.4.1)
+    - libextobjc/EXTNil (= 0.4.1)
+    - libextobjc/EXTSafeCategory (= 0.4.1)
+    - libextobjc/EXTScope (= 0.4.1)
+    - libextobjc/EXTSelectorChecking (= 0.4.1)
+    - libextobjc/EXTSynthesize (= 0.4.1)
+    - libextobjc/NSInvocation+EXT (= 0.4.1)
+    - libextobjc/NSMethodSignature+EXT (= 0.4.1)
+    - libextobjc/RuntimeExtensions (= 0.4.1)
+    - libextobjc/UmbrellaHeader (= 0.4.1)
+  - libextobjc/EXTADT (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTConcreteProtocol (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTKeyPathCoding (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTNil (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTSafeCategory (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTScope (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTSelectorChecking (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTSynthesize (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/NSInvocation+EXT (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/NSMethodSignature+EXT (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/RuntimeExtensions (0.4.1)
+  - libextobjc/UmbrellaHeader (0.4.1)
+  - MAGCameraKit (0.1.0):
+    - JPSVolumeButtonHandler (~> 1.0.4)
+    - libextobjc (~> 0.4.1)
+    - SVProgressHUD (~> 1.1.3)
+  - SVProgressHUD (1.1.3)
 
 DEPENDENCIES:
   - MAGCameraKit (from `../`)
@@ -9,7 +49,10 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  MAGCameraKit: 6788e35ef1f2998f14bef74074de934afe965540
+  JPSVolumeButtonHandler: a120aa1580ba99d501155e29dcd04c3cef80bed2
+  libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
+  MAGCameraKit: 855fad44d4eb0544ed74ef9a4822c9137395937e
+  SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
 
 PODFILE CHECKSUM: 5d5c48628d1a199bf8da6161b417e2d410528d09
 

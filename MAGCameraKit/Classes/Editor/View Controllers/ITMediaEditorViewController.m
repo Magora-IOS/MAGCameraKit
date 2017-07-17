@@ -10,7 +10,8 @@
 #import "ITMediaEditor.h"
 #import "ITColorsPanelViewController.h"
 #import "ITLayerAnimator.h"
-#import "UITextView+ShowappStyles.h"
+#import "MAGCameraKitCommon.h"
+
 
 @interface ITMediaEditorViewController () <UITextViewDelegate, ITMediaEditorDelegate>
 
@@ -51,10 +52,10 @@ static const NSUInteger maxInputTextLength = 500;
     [self hideColorsPanel];
     [self hideTrash];
     
-    //self.mediaEditor.trashFrame = self.trashButton.frame;
-    [self.cancelButton setImage:nil forState:UIControlStateNormal];
-    [self.cancelButton setTitle:NSLocalizedString(@"alert.cancel", @"Cancel") forState:UIControlStateNormal];
-    [self.textView setDefaultTextStyle:[ITTextStyle textStyleDarkTitle1]];
+    ////self.mediaEditor.trashFrame = self.trashButton.frame;
+    //[self.cancelButton setImage:nil forState:UIControlStateNormal];
+    //[self.cancelButton setTitle:NSLocalizedString(@"alert.cancel", @"Cancel") forState:UIControlStateNormal];
+    //[self.textView setDefaultTextStyle:[ITTextStyle textStyleDarkTitle1]];
     
     @weakify(self);
     self.colorsVC.didSelectColor = ^(UIColor *color) {

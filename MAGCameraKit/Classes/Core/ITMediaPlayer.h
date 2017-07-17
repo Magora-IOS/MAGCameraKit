@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <SCRecorder/SCRecorder.h>
+//#import <SCRecorder/SCRecorder.h>
+#include "SCRecorder.h"
 #import "ITRecordSession.h"
 #import "ITMediaPickerItem.h"
 

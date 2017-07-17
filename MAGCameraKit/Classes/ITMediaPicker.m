@@ -9,6 +9,7 @@
 #import "ITMediaPicker.h"
 #import "ITCameraViewController.h"
 #import "ITMediaPickerViewController.h"
+#import "MAGCameraKitCommon.h"
 
 
 @interface ITMediaPicker ()
@@ -48,7 +49,8 @@
 
 
 - (ITMediaPickerViewController *)loadCameraVC {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"CameraFlow" bundle:nil];
+    NSBundle *bundle = [NSBundle bundleForClass:[ITMediaPickerViewController class]];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"CameraFlow" bundle:bundle];
     UIViewController *vc = [storyboard instantiateInitialViewController];
     return (ITMediaPickerViewController *)vc;
 }

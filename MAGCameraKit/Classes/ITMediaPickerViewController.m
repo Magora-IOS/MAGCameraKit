@@ -10,6 +10,8 @@
 #import "ITCameraViewController.h"
 #import "ITMediaPreviewViewController.h"
 #import "ITMediaLibraryViewController.h"
+#import "MAGCameraKitCommon.h"
+
 
 @interface ITMediaPickerViewController ()
 

@@ -11,17 +11,14 @@
 
 typedef void(^ITTakeMediaCompletion)(ITMediaPickerItem *item);
 
-@class ITEvent, ITAnalyticsManager;
 
 @protocol ITMediaPickerPresenterProtocol <NSObject>
 
 @property (copy, nonatomic) ITTakeMediaCompletion completion;
 @property (weak, nonatomic) UIViewController *viewController;
-@property (strong , nonatomic) ITEvent *event;
-@property (strong, nonatomic) ITAnalyticsManager *analyticsManager;
 
 
-- (void)uploadMedia:(ITMediaPickerItem *)item;
+//- (void)uploadMedia:(ITMediaPickerItem *)item;
 
 @end
 
@@ -30,7 +27,5 @@ typedef void(^ITTakeMediaCompletion)(ITMediaPickerItem *item);
 
 @property (copy, nonatomic) ITTakeMediaCompletion completion;
 @property (weak, nonatomic) UIViewController *viewController;
-@property (strong , nonatomic) ITEvent *event;
-@property (strong, nonatomic) ITAnalyticsManager *analyticsManager;
 
 @end

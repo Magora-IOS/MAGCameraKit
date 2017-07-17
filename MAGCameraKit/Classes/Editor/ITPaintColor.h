@@ -14,4 +14,8 @@
 
 + (instancetype)paintColor:(UIColor *)color;
 
+UIColor * UIColorRGB(CGFloat r, CGFloat g, CGFloat b);
+UIColor * UIColorRGBA(CGFloat r, CGFloat g, CGFloat b, CGFloat a);
+UIColor * UIColorWithHex(NSString *hexString);
+
 @end

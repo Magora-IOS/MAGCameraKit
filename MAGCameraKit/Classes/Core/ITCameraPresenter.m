@@ -7,6 +7,7 @@
 //
 
 #import "ITCameraPresenter.h"
+#import "MAGCameraKitCommon.h"
 
 
 @interface ITCameraPresenter ()

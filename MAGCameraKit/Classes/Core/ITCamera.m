@@ -7,8 +7,10 @@
 //
 
 #import "ITCamera.h"
-#import <SCRecorder/SCRecorder.h>
-#import "UIImage+Additions.h"
+//#import <SCRecorder/SCRecorder.h>
+#import "SCRecorder.h"
+#import "UIImage+MAGCameraKit.h"
+#import "MAGCameraKitCommon.h"
 
 
 @interface ITCamera () <SCRecorderDelegate>

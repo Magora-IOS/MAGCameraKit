@@ -10,6 +10,7 @@
 #include "ITMediaPlayer.h"
 #include "ITMediaEditorViewController.h"
 #include "ITLayerAnimator.h"
+#import "MAGCameraKitCommon.h"
 
 #import <SVProgressHUD/SVProgressHUD.h>
 
@@ -49,8 +50,8 @@
     [self.cancelButton setTitle:NSLocalizedString(@"camera.preview.cancel", @"Retake") forState:UIControlStateNormal];
     [self.uploadButton setTitle:NSLocalizedString(@"camera.preview.upload", @"Upload") forState:UIControlStateNormal];
     
-    [self.retakeButton setImage:nil forState:UIControlStateNormal];
-    [self.retakeButton setTitle:NSLocalizedString(@"camera.preview.cancel", @"Retake") forState:UIControlStateNormal];
+    //[self.retakeButton setImage:nil forState:UIControlStateNormal];
+    //[self.retakeButton setTitle:NSLocalizedString(@"camera.preview.cancel", @"Retake") forState:UIControlStateNormal];
     
     [self showPopButtonsAnimation];
     [self hideCompleteButton];

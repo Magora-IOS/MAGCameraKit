@@ -7,9 +7,10 @@
 //
 
 #import "ITMediaPlayer.h"
-#import "ITConstants.h"
+//#import "ITConstants.h"
 #import "ITVideoExporter.h"
-#import "UIImage+Additions.h"
+#import "UIImage+MAGCameraKit.h"
+#import "MAGCameraKitCommon.h"
 
 
 @interface ITMediaPlayer ()
@@ -152,7 +153,7 @@
     AVAsset *asset = self.recordSession.videoAsset;
     CGSize videoSize = [self.recordSession mediaSize]; //asset.tracks.firstObject.naturalSize;
     
-    NSString *fileName = [NSString stringWithFormat:@"%@.mp4", generateUUIDString()];
+    NSString *fileName = [NSString stringWithFormat:@"%@.mp4", [self generateUUIDString]];
     NSURL *videoURL = [NSURL fileURLWithPath: [directory stringByAppendingPathComponent: fileName]];
     SCFilter *filter = [self overlayFilter:videoSize];
     
@@ -259,6 +260,15 @@
     }
     
     return newImage;
+}
+
+
+- (NSString *)generateUUIDString {
+    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+    NSString *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid);
+    CFRelease(uuid);
+    
+    return uuidString;
 }
 
 
