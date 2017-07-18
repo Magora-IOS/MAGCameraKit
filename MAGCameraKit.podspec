@@ -34,7 +34,7 @@ Pod::Spec.new do |s|
     'MAGCameraKit' => ['MAGCameraKit/Assets/*.png', 'MAGCameraKit/*.storyboard', 'MAGCameraKit/*.xcassets']
   }
 
-  s.public_header_files = 'Pod/Classes/MAGCameraKit.h'
+  # s.public_header_files = 'Pod/Classes/MAGCameraKit.h'
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'SCRecorder', :git => 'https://github.com/JoniStep/SCRecorder.git'

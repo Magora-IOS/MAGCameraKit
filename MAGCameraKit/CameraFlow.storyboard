@@ -13,7 +13,7 @@
         <!--Media Picker View Controller-->
         <scene sceneID="bfZ-pl-QQN">
             <objects>
-                <viewController storyboardIdentifier="ITMediaPickerViewController" id="hQq-z6-WMt" customClass="ITMediaPickerViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MAGMediaPickerViewController" id="hQq-z6-WMt" customClass="MAGMediaPickerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UV9-Hc-AjW"/>
                         <viewControllerLayoutGuide type="bottom" id="13C-cO-Tdb"/>
@@ -88,7 +88,7 @@
         <!--Camera View Controller-->
         <scene sceneID="NnF-00-vjp">
             <objects>
-                <viewController storyboardIdentifier="ITCameraViewController" id="qlM-31-b6X" customClass="ITCameraViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ITCameraViewController" id="qlM-31-b6X" customClass="MAGCameraViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="the-Ky-v4b"/>
                         <viewControllerLayoutGuide type="bottom" id="tDl-eW-86v"/>
@@ -100,14 +100,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LVi-fm-FkL">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PIQ-6t-WHz" customClass="ITBottomGrayGradientView">
+                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PIQ-6t-WHz" customClass="MAGBottomGrayGradientView">
                                         <rect key="frame" x="0.0" y="577" width="375" height="90"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="90" id="bMK-lx-ucg"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vwd-CZ-KU1" customClass="ITRecAnimationView">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vwd-CZ-KU1" customClass="MAGRecAnimationView">
                                         <rect key="frame" x="132" y="537" width="110" height="110"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -311,7 +311,7 @@
         <!--Media Preview View Controller-->
         <scene sceneID="FYk-YL-CA9">
             <objects>
-                <viewController id="aKZ-bf-xkM" customClass="ITMediaPreviewViewController" sceneMemberID="viewController">
+                <viewController id="aKZ-bf-xkM" customClass="MAGMediaPreviewViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eiD-bD-an4"/>
                         <viewControllerLayoutGuide type="bottom" id="Iu7-sQ-yX0"/>
@@ -332,7 +332,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rxh-Oe-QWa" customClass="ITBottomGrayGradientView">
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rxh-Oe-QWa" customClass="MAGBottomGrayGradientView">
                                 <rect key="frame" x="0.0" y="577" width="375" height="90"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -345,7 +345,7 @@
                                     <segue destination="Abx-wg-SmD" kind="embed" identifier="Editor" id="eug-iw-bLP"/>
                                 </connections>
                             </containerView>
-                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RZf-gc-1uh" customClass="ITTopGrayGradientView">
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RZf-gc-1uh" customClass="MAGTopGrayGradientView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WTS-Yq-5eA">
@@ -557,7 +557,7 @@
         <!--Media Library View Controller-->
         <scene sceneID="lKj-eW-rAp">
             <objects>
-                <viewController id="qci-vW-MC7" customClass="ITMediaLibraryViewController" sceneMemberID="viewController">
+                <viewController id="qci-vW-MC7" customClass="MAGMediaLibraryViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="585-pa-lX3"/>
                         <viewControllerLayoutGuide type="bottom" id="YMg-c5-wzu"/>
@@ -566,7 +566,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No photos or videos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Did-Im-zrN" customClass="DarkTitle6Label">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No photos or videos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Did-Im-zrN">
                                 <rect key="frame" x="16" y="80" width="343" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="avl-0v-pNe"/>
@@ -586,7 +586,7 @@
                                     <inset key="sectionInset" minX="4" minY="4" maxX="4" maxY="4"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ITMediaAssetCell" id="pJE-Z9-Lbv" customClass="ITMediaAssetCell">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MAGMediaAssetCell" id="pJE-Z9-Lbv" customClass="MAGMediaAssetCell">
                                         <rect key="frame" x="4" y="7" width="122" height="122"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -596,9 +596,11 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WhC-rf-Cew">
                                                     <rect key="frame" x="0.0" y="0.0" width="122" height="122"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="7s" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gh3-yf-tHV" customClass="DarkTitle6Label">
-                                                    <rect key="frame" x="64" y="93" width="50" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7s" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gh3-yf-tHV">
+                                                    <rect key="frame" x="96.5" y="93" width="17.5" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="yK1-Zw-cIl"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -608,7 +610,9 @@
                                         </view>
                                         <constraints>
                                             <constraint firstItem="WhC-rf-Cew" firstAttribute="leading" secondItem="pJE-Z9-Lbv" secondAttribute="leading" id="AhH-03-ac7"/>
+                                            <constraint firstItem="gh3-yf-tHV" firstAttribute="bottom" secondItem="pJE-Z9-Lbv" secondAttribute="bottomMargin" id="Cev-88-Fsn"/>
                                             <constraint firstItem="WhC-rf-Cew" firstAttribute="top" secondItem="pJE-Z9-Lbv" secondAttribute="top" id="DIr-M8-3dF"/>
+                                            <constraint firstItem="gh3-yf-tHV" firstAttribute="trailing" secondItem="pJE-Z9-Lbv" secondAttribute="trailingMargin" id="Q5n-5p-Y7i"/>
                                             <constraint firstAttribute="trailing" secondItem="WhC-rf-Cew" secondAttribute="trailing" id="r64-JI-fSL"/>
                                             <constraint firstAttribute="bottom" secondItem="WhC-rf-Cew" secondAttribute="bottom" id="yfS-R5-Wm0"/>
                                         </constraints>
@@ -623,7 +627,7 @@
                                     <outlet property="delegate" destination="qci-vW-MC7" id="8Ek-2a-C48"/>
                                 </connections>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photo and Video" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hWV-3e-spF" customClass="DarkTitle6Label">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photo and Video" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hWV-3e-spF">
                                 <rect key="frame" x="8" y="3" width="351" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="da7-NA-eyU"/>
@@ -661,7 +665,7 @@
         <!--Media Editor View Controller-->
         <scene sceneID="PGV-9C-dIY">
             <objects>
-                <viewController id="Abx-wg-SmD" customClass="ITMediaEditorViewController" sceneMemberID="viewController">
+                <viewController id="Abx-wg-SmD" customClass="MAGMediaEditorViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gm6-BS-f6T"/>
                         <viewControllerLayoutGuide type="bottom" id="aJv-kJ-Bhi"/>
@@ -670,7 +674,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XRz-2X-48e" customClass="ITEditingAreaView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XRz-2X-48e" customClass="MAGEditingAreaView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -702,10 +706,10 @@
                                     <segue destination="qMn-oj-EnW" kind="embed" identifier="colors" id="4ky-t1-ug1"/>
                                 </connections>
                             </containerView>
-                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GE2-uv-uGE" customClass="ITTopGrayGradientView">
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GE2-uv-uGE" customClass="MAGTopGrayGradientView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XYX-hX-cjG" customClass="DarkAcentButton">
+                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XYX-hX-cjG">
                                         <rect key="frame" x="8" y="24" width="42" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="T0p-qo-lHN"/>
@@ -853,7 +857,7 @@
         <!--Colors Panel View Controller-->
         <scene sceneID="QLv-Lv-e0m">
             <objects>
-                <viewController id="qMn-oj-EnW" customClass="ITColorsPanelViewController" sceneMemberID="viewController">
+                <viewController id="qMn-oj-EnW" customClass="MAGColorsPanelViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qpy-8Z-94e"/>
                         <viewControllerLayoutGuide type="bottom" id="FBY-DT-fmo"/>
@@ -878,7 +882,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ITColorsPanelCell" id="Ici-Bf-6QL" customClass="ITColorsPanelCell">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MAGColorsPanelCell" id="Ici-Bf-6QL" customClass="MAGColorsPanelCell">
                                                         <rect key="frame" x="0.0" y="1.5" width="54" height="75"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">

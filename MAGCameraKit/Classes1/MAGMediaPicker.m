@@ -7,8 +7,8 @@
 //
 
 #import "MAGMediaPicker.h"
-#import "MAGCameraViewController.h"
-#import "MAGMediaPickerViewController.h"
+#import "ITCameraViewController.h"
+#import "ITMediaPickerViewController.h"
 #import "MAGCameraKitCommon.h"
 
 
@@ -31,14 +31,14 @@
 
 
 - (void)pickMedia:(PickedMediaItem)completion {
-    MAGMediaPickerViewController *cameraVC = [self loadCameraVC];
-    cameraVC.presenter = [MAGMediaPickerPresenter new];
+    ITMediaPickerViewController *cameraVC = [self loadCameraVC];
+    cameraVC.presenter = [ITMediaPickerPresenter new];
     cameraVC.strings = self.strings;
     
     [self.ownerVC presentViewController:cameraVC animated:YES completion:nil];
 
     @weakify(cameraVC);
-    [cameraVC.presenter setCompletion:^(MAGMediaPickerItem *item) {
+    [cameraVC.presenter setCompletion:^(ITMediaPickerItem *item) {
         @strongify(cameraVC);
         [cameraVC dismissViewControllerAnimated:YES completion:nil];
 
@@ -49,11 +49,11 @@
 }
 
 
-- (MAGMediaPickerViewController *)loadCameraVC {
+- (ITMediaPickerViewController *)loadCameraVC {
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"CameraFlow" bundle:bundle];
     UIViewController *vc = [storyboard instantiateInitialViewController];
-    return (MAGMediaPickerViewController *)vc;
+    return (ITMediaPickerViewController *)vc;
 }
 
 

@@ -31,8 +31,8 @@
 
 - (IBAction)captureAction:(id)sender {
     
-    [self.mediaPicker pickMedia:^(ITMediaPickerItem *item) {
-        if (item.type == ITMediaTypeImage) {
+    [self.mediaPicker pickMedia:^(MAGMediaPickerItem *item) {
+        if (item.type == MAGMediaTypeImage) {
             self.imageView.image = item.image;
         }
     }];

@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MAGMediaPickerItem.h"
+#import "ITMediaPickerItem.h"
 #import "MAGMediaPickerStringsProtocol.h"
 
-typedef void(^PickedMediaItem)(MAGMediaPickerItem *item);
+typedef void(^PickedMediaItem)(ITMediaPickerItem *item);
 
 @interface MAGMediaPicker : NSObject
 
