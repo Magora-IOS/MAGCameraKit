@@ -9,19 +9,15 @@
 #import "MAGCameraViewController.h"
 #import "MAGRecAnimationView.h"
 
-//#import "RBVolumeButtons.h"
-#import "JPSVolumeButtonHandler.h"
 #import "MAGCameraKitCommon.h"
 
 @interface MAGCameraViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *cameraView;
 
-@property (strong, nonatomic) MAGCamera *camera;
 @property (strong, nonatomic) NSDate *lastTapDate;
-@property (assign, nonatomic) MAGFlashMode flasMode;
+@property (assign, nonatomic) MAGFlashMode flashMode;
 //@property (strong, nonatomic) RBVolumeButtons *volumeButtons;
-@property (strong, nonatomic) JPSVolumeButtonHandler *volumeHandler;
 
 @property (weak, nonatomic) IBOutlet UIButton *flashButton;
 @property (weak, nonatomic) IBOutlet MAGRecAnimationView *recordAnimationView;
@@ -38,17 +34,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //self.presenter = [[ITCameraPresenter alloc] initWithCameraView:self.cameraView];
-    self.camera = [MAGCamera new];
-    self.camera.cameraView = self.cameraView;
-    self.flasMode = MAGFlashModeAuto;
+    //self.camera = [MAGCamera new];
+    //self.camera.cameraView = self.cameraView;
+    
+    [self.presenter setupCameraView:self.cameraView];
+    self.flashMode = MAGFlashModeAuto;
     
     self.recordAnimationView.recRadius = 50;
     self.recordAnimationView.maxRecDuration = 60;
     self.recordAnimationView.recDelaing = 0.5;
     
     [self.tapRecognizer requireGestureRecognizerToFail:self.doubleTapRecognizer];
-    
-    //[self sibscribeToSoundVolumeButtons];
 }
 
 
@@ -67,159 +63,66 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     //[self.presenter viewDidLayout];
-    [self.camera layoutCameraLayer];
+    [self.presenter layoutCameraLayer];
 }
 
 
+- (void)onComplete {
+    
+}
 
-- (void)setFlasMode:(MAGFlashMode)flasMode {
-    _flasMode = flasMode;
+- (void)onCancel {
     
-    self.camera.flashMode = flasMode;
+}
+
+
+- (void)setFlashMode:(MAGFlashMode)flashMode {
+    _flashMode = flashMode;
     
-    //self.flashButton.highlighted = (self.flasMode == ITFlashModeAuto);
-    //self.flashButton.selected = (self.flasMode == ITFlashModeOn);
+    self.presenter.flashMode = flashMode;
+    
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     
     UIImage *imageFlashOff = [UIImage imageNamed:@"FlashOff" inBundle:bundle compatibleWithTraitCollection:nil];
     UIImage *imageFlashAuto = [UIImage imageNamed:@"FlashAuto" inBundle:bundle compatibleWithTraitCollection:nil];
     UIImage *imageFlashOn = [UIImage imageNamed:@"FlashOn" inBundle:bundle compatibleWithTraitCollection:nil];
     
-    if (self.flasMode == MAGFlashModeOff) {
+    if (self.flashMode == MAGFlashModeOff) {
         [self.flashButton setImage:imageFlashOff forState:UIControlStateNormal];
         
-    } else if (self.flasMode == MAGFlashModeAuto) {
+    } else if (self.flashMode == MAGFlashModeAuto) {
         [self.flashButton setImage:imageFlashAuto forState:UIControlStateNormal];
         
-    } else if (self.flasMode == MAGFlashModeOn) {
+    } else if (self.flashMode == MAGFlashModeOn) {
         [self.flashButton setImage:imageFlashOn forState:UIControlStateNormal];
     }
 }
 
 
-- (void)sibscribeToSoundVolumeButtons {
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(soundVolumeChanged:)
-                                                 name:@"AVSystemController_SystemVolumeDidChangeNotification"
-                                               object:nil];
-    
+
+- (void)onSoundVolumeChanged {
+    [self actionTap:nil];
 }
 
 
-
-- (void)setupVolumeHandler {
-    
-    @weakify(self);
-    self.volumeHandler = [JPSVolumeButtonHandler volumeButtonHandlerWithUpBlock:^{
-        @strongify(self);
-        [self actionTap:nil];
-        
-    } downBlock:^{
-        @strongify(self);
-        [self actionTap:nil];
-    }];
-}
-
-
-- (void)takePhoto {
-    
-    [self.recordAnimationView showEndTapping];
-    @weakify(self);
-    [self.camera takePhoto:^(UIImage *image) {
-        @strongify(self);
-        MAGRecordSession *item = nil;
-        
-        if (image) {
-            item = [MAGRecordSession new];
-            //item.type = ITMediaTypeImage;
-            item.photoImage = image;
-        }
-        
-        if (self.mediaRecorded && item) {
-            self.mediaRecorded(item);
-        }
-    }];
-}
-
-
-- (void)startRec {
-    @weakify(self);
-    [self.camera startRecording:^(AVAsset *asset) {
-        @strongify(self);
-        
-        [self.recordAnimationView stopProgress];
-        [self restoreFlashLight];
-        
-        MAGRecordSession *item = [MAGRecordSession new];
-        item.videoAsset = asset;
-        
-        if (self.mediaRecorded) {
-            self.mediaRecorded(item);
-        }
-    }];
-    
+- (void)onStartRecording {
     [self.recordAnimationView startProgress];
-    [self setupFlashLight];
 }
 
-
-- (void)stopRec {
-    [self.camera stopRecording];
-    
+- (void)onStopRecording {
     [self.recordAnimationView stopProgress];
-    [self restoreFlashLight];
 }
 
 
-- (void)setupFlashLight {
-    if (self.flasMode == MAGFlashModeOn) {
-        self.flasMode = MAGFlashModeLight;
-    }
-}
 
-
-- (void)restoreFlashLight {
-    if (self.flasMode == MAGFlashModeLight) {
-        self.flasMode = MAGFlashModeOn;
-    }
-}
-
-
-- (void)startSession {
-    
-    //[self setupVolumeButtons];
-    //[self.volumeButtons startStealingVolumeButtonEvents];
-    
-    [self setupVolumeHandler];
-    [self.volumeHandler startHandler:YES];
-    
-    [self.camera startSession];
-}
-
-
-- (void)stopSession {
-    [self.camera stopSession];
-    
-    //[self.volumeButtons stopStealingVolumeButtonEvents];
-    //self.volumeButtons = nil;
-    
-    [self.volumeHandler stopHandler];
-    self.volumeHandler = nil;
-}
-
-
-- (void)removeRecordedSession {
-    [self.camera removeAllSessionSegments];
-}
-
-
+/*
 - (IBAction)actionRecTouchDown:(id)sender {
     self.lastTapDate = [NSDate date];
     
     [self.recordAnimationView showStartTapping];
 }
-
-
+*/
+/*
 - (IBAction)actionRecTouchUp:(id)sender {
     
     NSDate *now = [NSDate date];
@@ -231,7 +134,7 @@
     
     [self.recordAnimationView showEndTapping];
 }
-
+*/
 
 - (IBAction)actionTapBegin:(id)sender {
     
@@ -241,7 +144,7 @@
 
 - (IBAction)actionTapCancel:(id)sender {
     
-    if ([self.camera isRecording] == NO) {
+    if ([self.presenter isRecording] == NO) {
         [self.recordAnimationView showEndTapping];
     }
 }
@@ -249,9 +152,12 @@
 
 - (void)actionTap:(id)sender {
     
-    if (self.camera.isRunning) {
-        [self takePhoto];
-    }
+    [self.recordAnimationView showEndTapping];
+    [self.presenter takePhotoAction];
+    
+    //if (self.camera.isRunning) {
+    //    [self takePhoto];
+    //}
 }
 
 
@@ -281,14 +187,14 @@
     
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan:
-            [self startRec];
+            [self.presenter startRecordAction];
             break;
             
         case UIGestureRecognizerStateFailed:
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateEnded:
             [self.recordAnimationView showEndTapping];
-            [self stopRec];
+            [self.presenter stopRecordAction];
             break;
             
         default:
@@ -298,50 +204,33 @@
 
 
 - (IBAction)actionClose:(id)sender {
-    
-    if (self.cancelled) {
-        self.cancelled();
-    }
+    [self.presenter closeAction];
 }
 
 
 - (IBAction)actionFlash:(id)sender {
     
-    if (self.flasMode == MAGFlashModeOff) {
-        self.flasMode = MAGFlashModeAuto;
+    if (self.flashMode == MAGFlashModeOff) {
+        self.flashMode = MAGFlashModeAuto;
         
-    } else if (self.flasMode == MAGFlashModeAuto) {
-        self.flasMode = MAGFlashModeOn;
+    } else if (self.flashMode == MAGFlashModeAuto) {
+        self.flashMode = MAGFlashModeOn;
         
-    } else if (self.flasMode == MAGFlashModeOn) {
-        self.flasMode = MAGFlashModeOff;
+    } else if (self.flashMode == MAGFlashModeOn) {
+        self.flashMode = MAGFlashModeOff;
     }
 }
 
 
 - (IBAction)actionRotate:(id)sender {
-    
-    [self.camera rotateCamera];
+    [self.presenter rotateCameraAction];
 }
 
 
-- (IBAction)focusAndExposeTap:(UIGestureRecognizer *)gestureRecognizer
-{
-    CGPoint point = [gestureRecognizer locationInView:self.view];
-    [self.camera focusAndExposure:point];
-}
-
-
-- (IBAction)soundVolumeChanged:(id)sender{
+- (IBAction)focusAndExposeTap:(UIGestureRecognizer *)gestureRecognizer {
     
-    NSNotification *notification = sender;
-    NSString *reason = notification.userInfo[@"AVSystemController_AudioVolumeChangeReasonNotificationParameter"];
-    
-    if ([reason isEqualToString:@"ExplicitVolumeChange"]) {
-        if (self.camera.isRunning) {
-            [self actionTap:sender];
-        }
-    }
+    CGPoint point = [gestureRecognizer locationInView:self.cameraView];
+    [self.presenter focusAndExposure:point];
 }
 
 
@@ -349,11 +238,11 @@
     
     switch (gesture.state) {
         case UIGestureRecognizerStateBegan:
-            [self.camera beginPinchZoom];
+            [self.presenter beginPinchZoom];
             break;
             
         case UIGestureRecognizerStateChanged:
-            [self.camera changePinchZoom:gesture.scale];
+            [self.presenter changePinchZoom:gesture.scale];
             break;
             
         case UIGestureRecognizerStateFailed:

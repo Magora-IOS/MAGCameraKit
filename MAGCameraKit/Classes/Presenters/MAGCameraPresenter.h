@@ -8,11 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import "MAGMediaPickerItem.h"
+#import "MAGRecordSession.h"
 #import "MAGCamera.h"
+#import "MAGCameraPresenter.h"
 
-typedef void(^PickItemCompletion)(MAGMediaPickerItem *item);
+typedef void(^MAGCameraCompleted)(MAGRecordSession *session);
+typedef void(^MAGCameraCancelled)();
 
+//typedef void(^PickItemCompletion)(MAGMediaPickerItem *item);
 
+/*
 @protocol MAGCameraPresenterProtocol <NSObject>
 
 @property (readonly, nonatomic) MAGCamera *camera;
@@ -25,13 +30,60 @@ typedef void(^PickItemCompletion)(MAGMediaPickerItem *item);
 - (void)viewDidLayout;
 
 @end
+*/
+
+@class MAGCameraPresenter;
+@class MAGCameraFlowCoordinator;
+
+@protocol MAGCameraVCProtocol <NSObject>
+
+@property (strong, nonatomic) MAGCameraPresenter *presenter;
+@property (strong, nonatomic) MAGCameraFlowCoordinator *coordinator;
+
+- (void)onComplete;
+- (void)onCancel;
+
+//- (void)onCameraSesionStart;
+//- (void)onCameraSesionStop;
+
+- (void)onSoundVolumeChanged;
+- (void)onStartRecording;
+- (void)onStopRecording;
 
 
-@interface MAGCameraPresenter : NSObject <MAGCameraPresenterProtocol>
+@end
 
-@property (readonly, nonatomic) MAGCamera *camera;
-@property(copy, nonatomic) PickItemCompletion pickItemCompletion;
+
+@interface MAGCameraPresenter : NSObject ///<MAGCameraPresenterProtocol>
+
+@property (weak, nonatomic) UIViewController<MAGCameraVCProtocol> *viewController;
+@property (copy, nonatomic) MAGCameraCompleted completed;
+@property (copy, nonatomic) MAGCameraCancelled cancelled;
+
+@property (assign, nonatomic) MAGFlashMode flashMode;
+@property (readonly, nonatomic) BOOL isRecording;
+
+//@property (readonly, nonatomic) MAGCamera *camera;
+//@property(copy, nonatomic) PickItemCompletion pickItemCompletion;
 
 - (instancetype)initWithCameraView:(UIView *)view;
+- (void)setupCameraView:(UIView *)view;
+- (void)layoutCameraLayer;
+- (void)rotateCameraAction;
+- (void)focusAndExposure:(CGPoint)position;
+
+- (void)startCameraSession;
+- (void)stopCameraSession;
+
+- (void)takePhotoAction;
+- (void)startRecordAction;
+- (void)stopRecordAction;
+
+- (void)beginPinchZoom;
+- (void)changePinchZoom:(CGFloat)zoom;
+
+- (void)removeRecordedSession;
+- (void)closeAction;
+
 
 @end

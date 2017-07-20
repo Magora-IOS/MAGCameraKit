@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "MAGMediaPickerItem.h"
 #import "MAGMediaPickerStringsProtocol.h"
+#import "MAGCameraFlowCoordinator.h"
 
 typedef void(^PickedMediaItem)(MAGMediaPickerItem *item);
 
@@ -16,7 +17,7 @@ typedef void(^PickedMediaItem)(MAGMediaPickerItem *item);
 
 @property (strong, nonatomic) id<MAGMediaPickerStringsProtocol> strings;
 
-- (instancetype)initWithVC:(UIViewController *)vc;
+- (instancetype)initWithRootVC:(UIViewController *)vc coordinator:( MAGCameraFlowCoordinator *)coordinator;
 - (void)pickMedia:(PickedMediaItem)completion;
 
 @end

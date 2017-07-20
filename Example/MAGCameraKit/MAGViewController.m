@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.mediaPicker = [[MAGMediaPicker alloc] initWithVC:self];
+    self.mediaPicker = [[MAGMediaPicker alloc] initWithRootVC:self coordinator:nil];
     self.mediaPicker.strings = [MAGMediaPickerStrings new];
 }
 

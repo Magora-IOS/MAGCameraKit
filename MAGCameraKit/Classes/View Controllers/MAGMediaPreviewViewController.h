@@ -10,17 +10,15 @@
 #import "MAGRecordSession.h"
 #import "MAGMediaPickerItem.h"
 #import "MAGMediaPickerStringsProtocol.h"
+#import "MAGMediaPreviewPresenter.h"
 
 
-typedef void(^MAGMediaPreviewCompleted)(MAGMediaPickerItem *item);
-typedef void(^MAGMediaPreviewCancelled)();
 
+@interface MAGMediaPreviewViewController : UIViewController <MAGMediaPreviewVCProtocol>
 
-@interface MAGMediaPreviewViewController : UIViewController
-
+@property (strong, nonatomic) MAGMediaPreviewPresenter *presenter;
+@property (strong, nonatomic) MAGCameraFlowCoordinator *coordinator;
 @property (strong, nonatomic) id<MAGMediaPickerStringsProtocol> strings;
-@property(copy, nonatomic) MAGMediaPreviewCompleted completed;
-@property(copy, nonatomic) MAGMediaPreviewCancelled cancelled;
 
 - (void)showRecordSession:(MAGRecordSession *)recordSession;
 

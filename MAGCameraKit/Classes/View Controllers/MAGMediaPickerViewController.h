@@ -11,9 +11,13 @@
 #import "MAGMediaPickerStringsProtocol.h"
 
 
-@interface MAGMediaPickerViewController : UIViewController
+@class MAGCameraFlowCoordinator;
+@class MAGMediaPickerPresenter;
 
-@property (strong, nonatomic) id<MAGMediaPickerPresenterProtocol> presenter;
+@interface MAGMediaPickerViewController : UIViewController <MAGMediaPickerVCProtocol>
+
+@property (strong, nonatomic) MAGCameraFlowCoordinator *coordinator;
+@property (strong, nonatomic) MAGMediaPickerPresenter *presenter;
 @property (strong, nonatomic) id<MAGMediaPickerStringsProtocol> strings;
 
 @end

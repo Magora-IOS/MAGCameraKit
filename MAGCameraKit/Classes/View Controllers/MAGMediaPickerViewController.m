@@ -11,6 +11,7 @@
 #import "MAGMediaPreviewViewController.h"
 #import "MAGMediaLibraryViewController.h"
 #import "MAGCameraKitCommon.h"
+#import "MAGCameraFlowCoordinator.h"
 
 
 @interface MAGMediaPickerViewController ()
@@ -192,6 +193,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
+    [self.coordinator prepareForSegue:segue];
+    /*
     if ([segue.identifier isEqualToString:@"Camera"]) {
         self.cameraVC = segue.destinationViewController;
         self.cameraVC.strings = self.strings;
@@ -204,6 +207,7 @@
         self.mediaVC = segue.destinationViewController;
         self.mediaVC.strings = self.strings;
     }
+     */
 }
 
 

@@ -12,19 +12,21 @@
 #import "MAGMediaPickerStringsProtocol.h"
 
 
-typedef void(^MAGCameraMediaRecorded)(MAGRecordSession *session);
-typedef void(^MAGCameraCancelled)();
+//typedef void(^MAGCameraCompleted)(MAGRecordSession *session);
+//typedef void(^MAGCameraCancelled)();
 
 
-@interface MAGCameraViewController : UIViewController
+@interface MAGCameraViewController : UIViewController <MAGCameraVCProtocol>
 
+@property (strong, nonatomic) MAGCameraPresenter *presenter;
+@property (strong, nonatomic) MAGCameraFlowCoordinator *coordinator;
 @property (strong, nonatomic) id<MAGMediaPickerStringsProtocol> strings;
-@property (copy, nonatomic) MAGCameraMediaRecorded mediaRecorded;
-@property (copy, nonatomic) MAGCameraCancelled cancelled;
+//@property (copy, nonatomic) MAGCameraCompleted completed;
+//@property (copy, nonatomic) MAGCameraCancelled cancelled;
 
-- (void)startSession;
-- (void)stopSession;
+//- (void)startSession;
+//- (void)stopSession;
 
-- (void)removeRecordedSession;
+//- (void)removeRecordedSession;
 
 @end
