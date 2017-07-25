@@ -7,10 +7,12 @@
 //
 
 #import "MAGMediaPreviewViewController.h"
-#include "MAGMediaPlayer.h"
 #include "MAGMediaEditorViewController.h"
+//#include "MAGMediaPlayer.h"
 #include "MAGLayerAnimator.h"
 #import "MAGCameraKitCommon.h"
+#import "MAGMediaPlayerView.h"
+#import "MAGMediaFilterView.h"
 
 #import <SVProgressHUD/SVProgressHUD.h>
 
@@ -18,9 +20,8 @@
 @interface MAGMediaPreviewViewController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet SCSwipeableFilterView *filterView;
-@property (weak, nonatomic) IBOutlet SCVideoPlayerView *playerView;
-@property (strong, nonatomic) MAGMediaPlayer *mediaPlayer;
+@property (weak, nonatomic) IBOutlet MAGMediaFilterView *filterView;
+@property (weak, nonatomic) IBOutlet MAGMediaPlayerView *playerView;
 
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIButton *uploadButton; //will deprecate
@@ -45,18 +46,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.mediaPlayer = [[MAGMediaPlayer alloc] initWithFilterView:self.filterView playerView:self.playerView];
+    //self.mediaPlayer = [[MAGMediaPlayer alloc] initWithFilterView:self.filterView playerView:self.playerView];
+    [self.presenter configurePlayerView:self.playerView filterView:self.filterView];
     
-    //[self.cancelButton setTitle:NSLocalizedString(@"camera.preview.cancel", @"Retake") forState:UIControlStateNormal];
-    //[self.uploadButton setTitle:NSLocalizedString(@"camera.preview.upload", @"Upload") forState:UIControlStateNormal];
-    
-    //[self.retakeButton setImage:nil forState:UIControlStateNormal];
-    //[self.retakeButton setTitle:NSLocalizedString(@"camera.preview.cancel", @"Retake") forState:UIControlStateNormal];
-    
-    //[self showPopButtonsAnimation];
+    ////[self showPopButtonsAnimation];
     [self hideCompleteButton];
     
-    [self setupTrackShowingTrash];
+    //[self setupTrackShowingTrash];
 }
 
 
@@ -65,41 +61,19 @@
     
 }
 
-
+/*
 - (void)showRecordSession:(MAGRecordSession *)recordSession {
     
-    self.mediaPlayer.recordSession = recordSession;
+    [self.presenter configureRecordSesion:recordSession];
+    [self.presenter playMedia];
     
-    SCFilter *emptyFilter = [SCFilter emptyFilter];
-    emptyFilter.name = @"#nofilter";
-    
-    if (recordSession.photoImage) {
-        self.imageView.image = recordSession.photoImage;
-        self.imageView.hidden = NO;
-        
-    } else if (recordSession) {
-        self.filterView.filters = @[emptyFilter];
-        self.filterView.selectedFilter = emptyFilter;
-        
-        self.imageView.image = nil;
-        self.imageView.hidden = YES;
-        [self.mediaPlayer play];
-        
-    } else {
-        //error
-    }
-    
-    [self.editorVC removeEditedViews];
-    [self.editorVC removeEditedLayers];
-    
-    CGSize mediaSize = [recordSession mediaSize];
-    [self.editorVC setupContentSize:mediaSize];
+    [self.coordinator clearEditorVC];
     
     //[self showPushButtonsAnimation];
     [self showCompleteButton];
 }
-
-
+*/
+/*
 - (void)setupTrackShowingTrash {
     
     @weakify(self);
@@ -112,7 +86,7 @@
             [self showCompleteButton];
         }
     }];
-}
+}*/
 
 
 - (void)showTopButtons {
@@ -146,19 +120,15 @@
 
 
 - (IBAction)actionCancel:(id)sender {
+    [self.presenter cancelAction];
     
-    [self.mediaPlayer pause];
-    
-    if (self.cancelled) {
-        self.cancelled();
-    }
-    
-    //[self showPopButtonsAnimation];
 }
 
 
 - (IBAction)actionComplete:(id)sender {
     
+    [self.presenter completeAction];
+    /*
     CGSize mediaSize = [self.mediaPlayer.recordSession mediaSize];
     UIImage *overlayImage = nil;
     
@@ -179,36 +149,19 @@
             }
         }
     }];
+    */
 }
 
 
 - (IBAction)actionText:(id)sender {
-    [self hideTopButtons];
-    //[self showPopButtonsAnimation];
-    [self hideCompleteButton];
-    
-    @weakify(self);
-    [self.editorVC goTextEdit:^{
-        @strongify(self);
-        [self showTopButtons];
-        //[self showPushButtonsAnimation];
-        [self showCompleteButton];
-    }];
+    //[self.presenter textEditAction];
+    [self.coordinator openTextEdit];
 }
 
 
 - (IBAction)actionPaint:(id)sender {
-    [self hideTopButtons];
-    //[self showPopButtonsAnimation];
-    [self hideCompleteButton];
-    
-    @weakify(self);
-    [self.editorVC goPaintEdit:^{
-        @strongify(self);
-        [self showTopButtons];
-        //[self showPushButtonsAnimation];
-        [self showCompleteButton];
-    }];
+    //[self.presenter paitAction];
+    [self.coordinator openPaintEdit];
     
     //self.imageView.image = [self.editorVC overlayImage];
     //[self.editorVC removeEditedLayers];
@@ -216,60 +169,22 @@
 
 
 - (IBAction)actionEmoji:(id)sender {
-    [self hideTopButtons];
-    //[self showPopButtonsAnimation];
-    [self hideCompleteButton];
-    
-    @weakify(self);
-    [self.editorVC goEmojiEdit:^{
-        @strongify(self);
-        [self showTopButtons];
-        //[self showPushButtonsAnimation];
-        [self showCompleteButton];
-    }];
+    //[self.presenter emojiEditAction];
+    [self.coordinator openEmojiEdit];
 }
 
-/*
-- (void)showPushButtonsAnimation {
-    
-    CGFloat inset = 10;
-    self.cancelButtonLeft.constant = inset;
-    self.doneButtonRight.constant = inset;
-    
-    self.uploadButton.enabled = YES;
-    self.cancelButton.enabled = YES;
-    
-    [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        [self.view layoutIfNeeded];
-    } completion:^(BOOL finished) {
-        //
-    }];
-    
-}
-
-
-- (void)showPopButtonsAnimation {
-    
-    CGFloat inset = - ( self.cancelButton.frame.origin.x + self.cancelButton.bounds.size.width);
-    self.cancelButtonLeft.constant = inset;
-    self.doneButtonRight.constant = inset;
-    
-    self.uploadButton.enabled = NO;
-    self.cancelButton.enabled = NO;
-    
-    [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        [self.view layoutIfNeeded];
-    } completion:^(BOOL finished) {
-        //
-    }];
-}
-*/
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
+    [self.coordinator prepareForSegue:segue];
+    /*
     if ([segue.identifier isEqualToString:@"Editor"]) {
         self.editorVC = segue.destinationViewController;
-    }
+    }*/
+}
+
+
+- (void)showErrorMessage:(NSString *)message {
+    [SVProgressHUD showErrorWithStatus:message];
 }
 
 

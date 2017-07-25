@@ -12,9 +12,11 @@
 #import "MAGMediaEditorPresenter.h"
 #import "MAGCameraPresenter.h"
 #import "MAGMediaPickerPresenter.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @interface MAGCameraFlowCoordinator ()
 
+@property (weak, nonatomic) UIViewController<MAGMediaPickerVCProtocol> *mediaPickerVC;
 @property (weak, nonatomic) UIViewController<MAGCameraVCProtocol> *cameraVC;
 @property (weak, nonatomic) UIViewController<MAGMediaPreviewVCProtocol> *previewVC;
 @property (weak, nonatomic) UIViewController<MAGMediaEditorVCProtocol> *editorVC;
@@ -26,14 +28,12 @@
 
 
 
-- (void)showMediaPicker:(UIViewController<MAGMediaPickerVCProtocol> *)pickerVC rootVC:(UIViewController *)rootVC completion:(MAGTakeMediaCompletion)completion {
+- (void)configureMediaPicker:(UIViewController<MAGMediaPickerVCProtocol> *)pickerVC completion:(MAGTakeMediaCompletion)completion {
     self.mediaPickerVC = pickerVC;
     
     pickerVC.coordinator = self;
     pickerVC.presenter = [MAGMediaPickerPresenter new];
     pickerVC.presenter.viewController = pickerVC;
-    
-    [rootVC presentViewController:pickerVC animated:YES completion:nil];
     
     @weakify(self);
     [pickerVC.presenter setCompletion:^(MAGMediaPickerItem *item) {
@@ -45,13 +45,22 @@
         }
     }];
     
-    //[self configureMediaPickerVC];
+    [pickerVC.presenter setCancellation:^() {
+        @strongify(self);
+        [self hideMediaPicker];
+    }];
+}
+
+
+- (void)showMediaPicker:(UIViewController *)rootVC {
+    [rootVC presentViewController:self.mediaPickerVC animated:YES completion:nil];
 }
 
 
 - (void)hideMediaPicker {
     [self.mediaPickerVC dismissViewControllerAnimated:YES completion:nil];
 }
+
 
 
 - (void)configureCameraVC:(UIViewController<MAGCameraVCProtocol> *)vc {
@@ -64,16 +73,15 @@
     @weakify(self);
     [self.cameraVC.presenter setCompleted:^(MAGRecordSession *session) {
         @strongify(self);
-        //[self.previewVC showRecordSession:session];
         //[self showPreview];
-        [self showPreView];
+        [self.cameraVC showPreview];
+        [self.previewVC.presenter openRecordSession:session];
     }];
     
     [self.cameraVC.presenter setCancelled:^() {
         @strongify(self);
-        //[self.cameraVC removeRecordedSession];
-        //[self dismissViewControllerAnimated:YES completion:nil];
-        [self hideCameraView];
+        [self.cameraVC.presenter removeRecordedSession];
+        [self.mediaPickerVC.presenter cancelAction];
     }];
 
 }
@@ -89,22 +97,16 @@
     @weakify(self);
     [self.previewVC.presenter setCompleted:^(MAGMediaPickerItem *item) {
         @strongify(self);
-        //[self.cameraVC removeRecordedSession];
-        //if (self.presenter.completion) {
-        //    self.presenter.completion(item);
-        //}
         
-        [self.cameraVC removeRecordedSession];
-        if (self.mediaPickerVC.presenter.completion) {
-            self.mediaPickerVC.presenter.completion(item);
-        }
+        [self.cameraVC.presenter removeRecordedSession];
+        [self.mediaPickerVC.presenter completeActionWithItem:item];
     }];
     
     [self.previewVC.presenter setCancelled:^() {
         @strongify(self);
-        //[self.cameraVC removeRecordedSession];
+        [self.cameraVC.presenter removeRecordedSession];
+        [self.cameraVC hidePreview];
         //[self hidePreview];
-        [self hidePreView];
     }];
     
 }
@@ -116,31 +118,51 @@
 
 
 - (void)configureEditorVC:(UIViewController<MAGMediaEditorVCProtocol> *)vc {
+    self.editorVC = vc;
     
-}
-
-
-
-
-
-- (void)showCameraView {
+    vc.coordinator = self;
+    vc.presenter = [MAGMediaEditorPresenter new];
+    vc.presenter.viewController = vc;
+    self.previewVC.presenter.editorPresenter = vc.presenter;
     
-}
-
-- (void)hideCameraView {
+    [self.editorVC.presenter setCompleted:^() {
+        [self.previewVC.presenter showControls];
+    }];
     
-}
-
-
-- (void)showPreView {
-    [self.previewVC showRecordSession:session];
-}
-
-- (void)hidePreView {
+    [self.editorVC.presenter setCancelled:^() {
+        [self.previewVC.presenter showControls];
+    }];
     
+    //[self setupTrackShowingTrash];
 }
 
+/*
+- (void)setupTrackShowingTrash {
+    
+    @weakify(self);
+    [self.editorVC.presenter trackShowingTrash:^(BOOL show) {
+        @strongify(self);
+        
+        if (show) {
+            [self.previewVC hideCompleteButton];
+        } else {
+            [self.previewVC showCompleteButton];
+        }
+    }];
+}
+*/
 
+/*
+- (void)showPreview:(MAGRecordSession *)session {
+    [self.cameraVC showPreview];
+    [self.previewVC.presenter openRecordSession:session];
+}
+
+- (void)hidePreview {
+    [self.cameraVC hidePreview];
+}
+*/
+/*
 - (void)showEditView {
     
 }
@@ -148,6 +170,27 @@
 - (void)hideEditView {
     
 }
+*/
+
+
+- (void)openTextEdit {
+    [self.previewVC.presenter hideControls];
+    [self.editorVC.presenter openTextEdit];
+}
+
+
+- (void)openPaintEdit {
+    [self.previewVC.presenter hideControls];
+    [self.editorVC.presenter openPaintEdit];
+}
+
+
+- (void)openEmojiEdit {
+    [self.previewVC.presenter hideControls];
+    [self.editorVC.presenter openEmojiEdit];
+}
+
+
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue {
@@ -167,6 +210,9 @@
     } else if ([segue.identifier isEqualToString:@"Media"]) {
         //self.mediaVC = segue.destinationViewController;
         //self.mediaVC.strings = self.strings;
+        
+    } else if ([segue.identifier isEqualToString:@"Editor"]) {
+        [self configureEditorVC:segue.destinationViewController];
     }
 }
 

@@ -22,7 +22,7 @@
 @implementation MAGMediaPicker
 
 
-- (instancetype)initWithRootVC:(UIViewController *)vc coordinator:( MAGCameraFlowCoordinator *)coordinator {
+- (instancetype)initWithRootVC:(UIViewController *)vc coordinator:(MAGCameraFlowCoordinator *)coordinator {
     if (self = [super init]) {
         self.rootVC = vc;
         self.coordinator = coordinator;
@@ -39,11 +39,13 @@
 - (void)pickMedia:(PickedMediaItem)completion {
     MAGMediaPickerViewController *pickerVC = [self loadCameraVC];
     
-    [self.coordinator showMediaPicker:pickerVC rootVC:self.rootVC completion:^(MAGMediaPickerItem *item) {
+    [self.coordinator configureMediaPicker:pickerVC completion:^(MAGMediaPickerItem *item) {
         if (completion) {
             completion(item);
         }
     }];
+    
+    [self.coordinator showMediaPicker:self.rootVC];
     
     /*
     pickerVC.presenter = [MAGMediaPickerPresenter new];

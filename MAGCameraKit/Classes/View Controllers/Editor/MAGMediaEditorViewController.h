@@ -8,23 +8,22 @@
 
 #import <UIKit/UIKit.h>
 #import "MAGMediaEditor.h"
+#import "MAGMediaEditorPresenter.h"
 
-typedef void(^MAGMediaEditCompletion)();
-typedef void(^MAGMediaEditDidDrag)(UIPanGestureRecognizer *recognizer, MAGMediaEditorState state);
-typedef void(^MAGMediaEditDidShowTrash)(BOOL show);
+//typedef void(^MAGMediaEditCompletion)();
+//typedef void(^MAGMediaEditDidDrag)(UIPanGestureRecognizer *recognizer, MAGMediaEditorState state);
+//typedef void(^MAGMediaEditDidShowTrash)(BOOL show);
 
-@interface MAGMediaEditorViewController : UIViewController
+@interface MAGMediaEditorViewController : UIViewController <MAGMediaEditorVCProtocol>
 
-- (void)goTextEdit:(MAGMediaEditCompletion)completion;
-- (void)goPaintEdit:(MAGMediaEditCompletion)completion;
-- (void)goEmojiEdit:(MAGMediaEditCompletion)completion;
+//- (void)goTextEdit:(MAGMediaEditCompletion)completion;
+//- (void)goPaintEdit:(MAGMediaEditCompletion)completion;
+//- (void)goEmojiEdit:(MAGMediaEditCompletion)completion;
 
-- (void)trackDragging:(MAGMediaEditDidDrag)drag;
-- (void)trackShowingTrash:(MAGMediaEditDidShowTrash)didShow;
+//- (void)trackDragging:(MAGMediaEditDidDrag)drag;
+//- (void)trackShowingTrash:(MAGMediaEditDidShowTrash)didShow;
 
-- (void)setupContentSize:(CGSize)size;
-- (UIImage *)overlayImage:(CGSize)size;
-- (void)removeEditedLayers;
-- (void)removeEditedViews;
+//- (void)setupContentSize:(CGSize)size;
+//- (UIImage *)overlayImage:(CGSize)size;
 
 @end

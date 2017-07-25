@@ -10,7 +10,7 @@
 #define MAGDebugKit_h
 
 #import "MAGMediaPicker.h"
-#import "MAGMediaPickerStrings.h"
+#import "MAGMediaPickerStringsProtocol.h"
 
 
 #endif /* MAGDebugKit_h */

@@ -7,7 +7,6 @@
 //
 
 #import "MAGMediaEditorViewController.h"
-#import "MAGMediaEditor.h"
 #import "MAGColorsPanelViewController.h"
 #import "MAGLayerAnimator.h"
 #import "MAGCameraKitCommon.h"
@@ -15,7 +14,6 @@
 
 @interface MAGMediaEditorViewController () <UITextViewDelegate, MAGMediaEditorDelegate>
 
-@property (strong, nonatomic) MAGMediaEditor *mediaEditor;
 
 @property (weak, nonatomic) IBOutlet MAGEditingAreaView *areaView;
 @property (weak, nonatomic) IBOutlet UIView *topButtonsView;
@@ -27,9 +25,9 @@
 @property (strong, nonatomic) MAGColorsPanelViewController *colorsVC;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *colorsPanelBottom;
 
-@property (copy, nonatomic) MAGMediaEditCompletion editCompletion;
-@property (copy, nonatomic) MAGMediaEditDidDrag dragHandler;
-@property (copy, nonatomic) MAGMediaEditDidShowTrash didShowTrash;
+//@property (copy, nonatomic) MAGMediaEditCompletion editCompletion;
+//@property (copy, nonatomic) MAGMediaEditDidDrag dragHandler;
+//@property (copy, nonatomic) MAGMediaEditDidShowTrash didShowTrash;
 
 @end
 
@@ -42,10 +40,13 @@ static const NSUInteger maxInputTextLength = 500;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    /*
     self.mediaEditor = [[MAGMediaEditor alloc] initWithArea:self.areaView];
     self.mediaEditor.state = MAGMediaEditorStateDefault;
     
     self.mediaEditor.delegate = self;
+    */
+    [self.presenter configureWithAreaView:self.areaView];
     
     [self hideTextView];
     [self hideTopButtons];
@@ -60,7 +61,7 @@ static const NSUInteger maxInputTextLength = 500;
     @weakify(self);
     self.colorsVC.didSelectColor = ^(UIColor *color) {
         @strongify(self);
-        [self.mediaEditor choiceColor:color];
+        [self.presenter choiceColor:color];
         self.textView.textColor = color;
     };
     
@@ -68,95 +69,17 @@ static const NSUInteger maxInputTextLength = 500;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
-/*
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-    //
-}*/
-
 
 #pragma mark - Public
 
 
-- (void)goTextEdit:(MAGMediaEditCompletion)completion {
-    self.editCompletion = completion;
-    
-    self.mediaEditor.state = MAGMediaEditorStateText;
-    [self showTopButtons];
-    [self showColorsPanel];
-    [self hideUndoButton];
-    [self showTextView];
-}
-
-
-- (void)goPaintEdit:(MAGMediaEditCompletion)completion {
-    self.editCompletion = completion;
-    
-    self.mediaEditor.state = MAGMediaEditorStatePaint;
-    [self showTopButtons];
-    [self showColorsPanel];
-    [self checkForPaintedItems];
-    //[self removeEditedLayers];
-    [self.mediaEditor beginPaintObject];
-    
-}
-
-
-- (void)goEmojiEdit:(MAGMediaEditCompletion)completion {
-    self.editCompletion = completion;
-    
-    self.mediaEditor.state = MAGMediaEditorStateStickers;
-    [self showTopButtons];
-    [self showColorsPanel];
-    [self hideUndoButton];
-    [self showTextView];
-    
-    //[self showEmojiCollection];
-}
-
-
-- (void)trackDragging:(MAGMediaEditDidDrag)drag {
-    self.dragHandler = drag;
-}
-
-
-- (void)trackShowingTrash:(MAGMediaEditDidShowTrash)didShow {
-    self.didShowTrash = didShow;
-}
-
-
-- (void)setupContentSize:(CGSize)size {
-    
-    CGFloat contentScale = size.width / self.areaView.bounds.size.width;
-    contentScale *= [[UIScreen mainScreen] scale];
-    self.areaView.layer.contentsScale = contentScale;
-    self.mediaEditor.contentScale = contentScale;
-}
-
-
-- (UIImage *)overlayImage:(CGSize)size {
-    UIImage *image = [self.mediaEditor renderOverlayImage:size];
-    
-    return image;
-}
-
-
-- (void)removeEditedLayers {
-    [self.mediaEditor removeEditedLayers];
-}
-
-
-- (void)removeEditedViews {
-    [self.mediaEditor removeEditedViews];
-}
-
 
 #pragma mark - Private
-
+/*
 - (void)showEmojiCollection {
     
     [self.mediaEditor addEmojiObject:@"jjj☺️🔥"];
-}
+}*/
 
 
 - (void)showTextView {
@@ -243,7 +166,7 @@ static const NSUInteger maxInputTextLength = 500;
     self.undoButton.hidden = YES;
 }
 
-
+/*
 - (void)checkForPaintedItems {
     
     if ([self.mediaEditor hasPaintedLayers]) {
@@ -261,6 +184,11 @@ static const NSUInteger maxInputTextLength = 500;
     if (text.length) {
         [self.mediaEditor addTextObject:self.textView];
     }
+}
+*/
+
+- (UITextView *)editorTextView {
+    return self.textView;
 }
 
 
@@ -310,14 +238,18 @@ static const NSUInteger maxInputTextLength = 500;
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
     
+    [self.presenter touchesBeganAction:touches];
+    /*
     UITouch *touch = touches.anyObject;
     [self.mediaEditor selectCurrentObject:[touch locationInView:self.areaView]];
+    */
     //NSLog(@"touchesBegan: %@", touches);
 }
 
 
 - (IBAction)doneAction:(id)sender {
-    
+    [self.presenter completeAction];
+    /*
     if (self.textView.hidden == NO) {
         [self addTextToEditor];
     }
@@ -330,23 +262,26 @@ static const NSUInteger maxInputTextLength = 500;
     if (self.editCompletion) {
         self.editCompletion();
         self.editCompletion = nil;
-    }
+    }*/
 }
 
 
 - (IBAction)undoAction:(id)sender {
-    
+    [self.presenter undoAction];
+    /*
     BOOL done = [self.mediaEditor undoAction];
     
     if (done) {
         //performed if no one painted layer
         [self checkForPaintedItems];
     }
+    */
 }
 
 
 - (IBAction)cancelAction:(id)sender {
-    
+    [self.presenter cancelAction];
+    /*
     [self.mediaEditor cancelAction];
     
     [self hideTopButtons];
@@ -358,7 +293,7 @@ static const NSUInteger maxInputTextLength = 500;
     if (self.editCompletion) {
         self.editCompletion();
         self.editCompletion = nil;
-    }
+    }*/
 }
 
 /* //old impl.
@@ -384,30 +319,53 @@ static const NSUInteger maxInputTextLength = 500;
 - (IBAction)pinchGestureAction:(UIPinchGestureRecognizer *)gesture {
     NSLog(@"Pinch: %f, %f", gesture.scale, gesture.velocity);
     
-    [self.mediaEditor handlePinchGesture:gesture];
+    //[self.mediaEditor handlePinchGesture:gesture];
+    [self.presenter pinchGestureAction:gesture];
 }
 
 
 - (IBAction)rotationGestureAction:(UIRotationGestureRecognizer *)gesture {
     NSLog(@"Rotate: %f, %f", gesture.rotation, gesture.velocity);
     
-    [self.mediaEditor handleRotateGesture:gesture];
+    //[self.mediaEditor handleRotateGesture:gesture];
+    [self.presenter rotationGestureAction:gesture];
 }
 
 
 - (IBAction)panGestureAction:(UIPanGestureRecognizer *)gesture {
     //NSLog(@"Rotate: %f, %f", gesture.rotation, gesture.velocity);
     
+    [self.presenter panGestureAction:gesture];
+    /*
     [self.mediaEditor handlePanGesture:gesture];
     [self checkForPaintedItems];
     
     if (self.dragHandler) {
         self.dragHandler(gesture, self.mediaEditor.state);
-    }
+    }*/
 }
 
--(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;
+}
+
+
+
+- (CGRect)trashFrame {
+    return self.trashButton.frame;
+}
+
+
+- (void)highlightTrash:(BOOL)highlight {
+    
+    CALayer *layer = self.trashButton.layer;
+    MAGLayerAnimator *animator = [MAGLayerAnimator new];
+    
+    if (highlight) {
+        [animator animateSpringScale:layer from:1 to:1.25];
+    } else {
+        [animator animateSpringScale:layer from:1.25 to:1];
+    }
 }
 
 
@@ -441,37 +399,6 @@ static const NSUInteger maxInputTextLength = 500;
     return YES;
 }
 
-
-#pragma mark - MAGMediaEditorDelegate
-
-- (CGRect)trashFrameForMediaEditor:(MAGMediaEditor *)editor {
-    return self.trashButton.frame;
-}
-
-- (void)mediaEditor:(MAGMediaEditor *)editor showTrash:(BOOL)showTrash {
-    
-    if (showTrash) {
-        [self showTrash];
-    } else {
-        [self hideTrash];
-    }
-    
-    if (self.didShowTrash) {
-        self.didShowTrash(showTrash);
-    }
-}
-
-- (void)mediaEditor:(MAGMediaEditor *)editor highlightTrash:(BOOL)highlightTrash {
-    
-    CALayer *layer = self.trashButton.layer;
-    MAGLayerAnimator *animator = [MAGLayerAnimator new];
-    
-    if (highlightTrash) {
-        [animator animateSpringScale:layer from:1 to:1.25];
-    } else {
-        [animator animateSpringScale:layer from:1.25 to:1];
-    }
-}
 
 
 #pragma mark - Navigation

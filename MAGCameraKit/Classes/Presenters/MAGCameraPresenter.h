@@ -50,6 +50,9 @@ typedef void(^MAGCameraCancelled)();
 - (void)onStartRecording;
 - (void)onStopRecording;
 
+- (void)showPreview;
+- (void)hidePreview;
+
 
 @end
 

@@ -16,7 +16,7 @@
 
 @property (strong, nonatomic) SCPlayer *player;
 @property (weak, nonatomic) SCSwipeableFilterView *filterView;
-@property (weak, nonatomic) SCVideoPlayerView *playerView;
+@property (weak, nonatomic) MAGMediaPlayerView *playerView;
 @property (strong, nonatomic) MAGVideoExporter *exporter;
 
 @end
@@ -24,7 +24,7 @@
 
 @implementation MAGMediaPlayer
 
-- (instancetype)initWithFilterView:(SCSwipeableFilterView *)filterView playerView:(SCVideoPlayerView *)playerView {
+- (instancetype)initWithFilterView:(MAGMediaFilterView *)filterView playerView:(MAGMediaPlayerView *)playerView {
     
     if (self = [super init]) {
         self.player = [SCPlayer player];
@@ -98,8 +98,17 @@
 
 - (void)play {
     
+    // If filters will added then it need to be refactored
+    SCFilter *emptyFilter = [SCFilter emptyFilter];
+    emptyFilter.name = @"#nofilter";
+    self.filterView.filters = @[emptyFilter];
+    self.filterView.selectedFilter = emptyFilter;
+    
     if (self.player.currentItem) {
         [self.player play];
+        
+    } else if (self.recordSession.photoImage) {
+        [self.playerView showImage:self.recordSession.photoImage];
     }
 }
 

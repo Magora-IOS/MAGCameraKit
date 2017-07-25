@@ -20,6 +20,6 @@
 @property (strong, nonatomic) MAGCameraFlowCoordinator *coordinator;
 @property (strong, nonatomic) id<MAGMediaPickerStringsProtocol> strings;
 
-- (void)showRecordSession:(MAGRecordSession *)recordSession;
+//- (void)showRecordSession:(MAGRecordSession *)recordSession;
 
 @end

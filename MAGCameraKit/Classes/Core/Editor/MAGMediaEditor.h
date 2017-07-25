@@ -51,8 +51,10 @@ typedef enum : NSUInteger {
 - (BOOL)hasPaintedLayers;
 - (BOOL)hasAddedViews;
 
+- (void)selectObjectWithTouch:(UITouch *)touch;
 - (void)selectCurrentObject:(CGPoint)point;
 - (void)choiceColor:(UIColor *)color;
+- (void)configureContentSize:(CGSize)size;
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)recognizer;
 - (void)handlePinchGesture:(UIPinchGestureRecognizer *)recognizer;

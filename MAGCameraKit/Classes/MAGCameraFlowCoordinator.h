@@ -12,20 +12,25 @@
 
 @interface MAGCameraFlowCoordinator : NSObject
 
-@property (weak, nonatomic) UIViewController<MAGMediaPickerVCProtocol> *mediaPickerVC;
 
-- (void)showMediaPicker:(UIViewController<MAGMediaPickerVCProtocol> *)pickerVC rootVC:(UIViewController *)rootVC completion:(MAGTakeMediaCompletion)completion;
+- (void)configureMediaPicker:(UIViewController<MAGMediaPickerVCProtocol> *)pickerVC completion:(MAGTakeMediaCompletion)completion;
+- (void)showMediaPicker:(UIViewController *)rootVC;
 - (void)hideMediaPicker;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue;
 
-- (void)showCameraView;
-- (void)hideCameraView;
+//- (void)showCameraView;
+//- (void)hideCameraView;
 
-- (void)showPreView;
-- (void)hidePreView;
+//- (void)showPreView;
+//- (void)hidePreView;
 
-- (void)showEditView;
-- (void)hideEditView;
+//- (void)showEditView;
+//- (void)hideEditView;
+
+- (void)openTextEdit;
+- (void)openPaintEdit;
+- (void)openEmojiEdit;
+
 
 @end

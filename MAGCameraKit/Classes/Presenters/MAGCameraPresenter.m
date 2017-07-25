@@ -212,7 +212,7 @@
 
 
 
-
+/*
 - (void)viewDidLayout {
     [self.camera layoutCameraLayer];
 }
@@ -244,5 +244,6 @@
         }
     }];
 }
+*/
 
 @end

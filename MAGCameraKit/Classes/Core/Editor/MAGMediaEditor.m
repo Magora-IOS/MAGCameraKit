@@ -160,6 +160,11 @@ static const CGFloat maxAddedTextHeight = 10000;
 }
 
 
+- (void)selectObjectWithTouch:(UITouch *)touch {
+    [self selectCurrentObject:[touch locationInView:self.areaView]];
+}
+
+
 - (void)selectCurrentObject:(CGPoint)point {
     
     if (self.state == MAGMediaEditorStateDefault) {
@@ -194,6 +199,15 @@ static const CGFloat maxAddedTextHeight = 10000;
 
 - (void)choiceColor:(UIColor *)color {
     [self.painter changeColor:color];
+}
+
+
+- (void)configureContentSize:(CGSize)size {
+    
+    CGFloat contentScale = size.width / self.areaView.bounds.size.width;
+    contentScale *= [[UIScreen mainScreen] scale];
+    self.areaView.layer.contentsScale = contentScale;
+    self.contentScale = contentScale;
 }
 
 

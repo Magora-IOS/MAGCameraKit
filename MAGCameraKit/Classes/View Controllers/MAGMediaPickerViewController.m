@@ -17,7 +17,7 @@
 @interface MAGMediaPickerViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *cameraView;
-@property (weak, nonatomic) IBOutlet UIView *previewView;
+//@property (weak, nonatomic) IBOutlet UIView *previewView;
 @property (weak, nonatomic) IBOutlet UIView *mediaView;
 
 @property (weak, nonatomic) MAGCameraViewController *cameraVC;
@@ -36,10 +36,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self hidePreview];
+    ////[self hidePreview];
     
     self.mediaVC.maxVideoDuration = 60;
     
+    /*
     @weakify(self);
     [self.cameraVC setMediaRecorded:^(MAGRecordSession *session) {
         @strongify(self);
@@ -67,7 +68,7 @@
             self.presenter.completion(item);
         }
     }];
-    
+    */
     
     [self.mediaVC setSelectedMediaItem:^(MAGRecordSession *session) {
         @strongify(self);
@@ -80,7 +81,7 @@
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
-
+/*
 - (void)showPreview {
     
     self.cameraView.hidden = YES;
@@ -111,7 +112,7 @@
 - (void)awakeCamera {
     [self.cameraVC startSession];
 }
-
+*/
 
 - (void)showBlurCameraView {
     

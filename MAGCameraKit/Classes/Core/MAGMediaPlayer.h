@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 //#import <SCRecorder/SCRecorder.h>
-#include "SCRecorder.h"
+//#include "SCRecorder.h"
 #import "MAGRecordSession.h"
 #import "MAGMediaPickerItem.h"
+#import "MAGMediaPlayerView.h"
+#import "MAGMediaFilterView.h"
 
 
 @interface MAGMediaPlayer : NSObject

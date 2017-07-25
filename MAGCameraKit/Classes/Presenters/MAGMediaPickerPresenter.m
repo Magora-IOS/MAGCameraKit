@@ -20,4 +20,18 @@
 @implementation MAGMediaPickerPresenter
 
 
+- (void)completeActionWithItem:(MAGMediaPickerItem *)item {
+    
+    if (self.completion) {
+        self.completion(item);
+    }
+}
+
+- (void)cancelAction {
+    if (self.cancellation) {
+        self.cancellation();
+    }
+}
+
+
 @end

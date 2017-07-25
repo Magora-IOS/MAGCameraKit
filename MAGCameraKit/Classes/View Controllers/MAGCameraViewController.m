@@ -14,8 +14,9 @@
 @interface MAGCameraViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *cameraView;
+@property (weak, nonatomic) IBOutlet UIView *previewView;
 
-@property (strong, nonatomic) NSDate *lastTapDate;
+//@property (strong, nonatomic) NSDate *lastTapDate;
 @property (assign, nonatomic) MAGFlashMode flashMode;
 //@property (strong, nonatomic) RBVolumeButtons *volumeButtons;
 
@@ -114,6 +115,40 @@
 }
 
 
+- (void)showPreview {
+    
+    self.cameraView.hidden = YES;
+    self.previewView.hidden = NO;
+    
+    //[self suspendCamera];
+    [self.presenter stopCameraSession];
+    
+    [UIView transitionWithView:self.previewView duration:0.3 options:UIViewAnimationOptionShowHideTransitionViews animations:^{
+        [self.previewView layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        //
+    }];
+}
+
+
+- (void)hidePreview {
+    self.cameraView.hidden = NO;
+    self.previewView.hidden = YES;
+    
+    //[self awakeCamera];
+    [self.presenter startCameraSession];
+}
+
+/*
+- (void)suspendCamera {
+    [self.presenter stopCameraSession];
+}
+
+
+- (void)awakeCamera {
+    [self.presenter startCameraSession];
+}
+*/
 
 /*
 - (IBAction)actionRecTouchDown:(id)sender {

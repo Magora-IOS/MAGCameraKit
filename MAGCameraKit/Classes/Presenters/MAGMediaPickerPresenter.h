@@ -12,6 +12,7 @@
 
 
 typedef void(^MAGTakeMediaCompletion)(MAGMediaPickerItem *item);
+typedef void(^MAGTakeMediaCancellation)();
 
 @class MAGMediaPickerPresenter;
 @class MAGCameraFlowCoordinator;
@@ -19,6 +20,9 @@ typedef void(^MAGTakeMediaCompletion)(MAGMediaPickerItem *item);
 @protocol MAGMediaPickerVCProtocol <NSObject>
 @property (strong, nonatomic) MAGCameraFlowCoordinator *coordinator;
 @property (strong, nonatomic) MAGMediaPickerPresenter *presenter;
+
+- (void)close;
+
 @end
 
 /*
@@ -37,5 +41,9 @@ typedef void(^MAGTakeMediaCompletion)(MAGMediaPickerItem *item);
 
 @property (weak, nonatomic) UIViewController<MAGMediaPickerVCProtocol> *viewController;
 @property (copy, nonatomic) MAGTakeMediaCompletion completion;
+@property (copy, nonatomic) MAGTakeMediaCancellation cancellation;
+
+- (void)completeActionWithItem:(MAGMediaPickerItem *)item;
+- (void)cancelAction;
 
 @end

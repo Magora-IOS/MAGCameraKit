@@ -68,7 +68,6 @@
                         <outlet property="cameraBottom" destination="RPN-dD-rWc" id="05r-zC-rkO"/>
                         <outlet property="cameraView" destination="CGZ-79-1x8" id="OVo-UP-Bdo"/>
                         <outlet property="mediaView" destination="1dQ-Rx-uRv" id="6An-US-e6p"/>
-                        <outlet property="previewView" destination="ftc-cE-u4q" id="oIm-7N-Ct2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pGn-uE-Ss9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -97,6 +96,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cYA-5W-84V">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <segue destination="aKZ-bf-xkM" kind="embed" identifier="Preview" id="euZ-yH-aPN"/>
+                                </connections>
+                            </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LVi-fm-FkL">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
@@ -265,9 +270,13 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="cYA-5W-84V" secondAttribute="trailing" id="65l-Kt-Sl5"/>
+                            <constraint firstItem="tDl-eW-86v" firstAttribute="top" secondItem="cYA-5W-84V" secondAttribute="bottom" id="O9a-FF-pko"/>
                             <constraint firstAttribute="trailing" secondItem="LVi-fm-FkL" secondAttribute="trailing" id="QNS-i1-wcb"/>
                             <constraint firstItem="tDl-eW-86v" firstAttribute="top" secondItem="LVi-fm-FkL" secondAttribute="bottom" id="U2Z-6h-Ges"/>
+                            <constraint firstItem="cYA-5W-84V" firstAttribute="top" secondItem="the-Ky-v4b" secondAttribute="bottom" id="V4o-fN-MJe"/>
                             <constraint firstItem="LVi-fm-FkL" firstAttribute="top" secondItem="Frx-Mu-LPM" secondAttribute="top" id="aSv-uB-UlS"/>
+                            <constraint firstItem="cYA-5W-84V" firstAttribute="leading" secondItem="Frx-Mu-LPM" secondAttribute="leading" id="gBA-XN-Kdp"/>
                             <constraint firstItem="LVi-fm-FkL" firstAttribute="leading" secondItem="Frx-Mu-LPM" secondAttribute="leading" id="hw9-z4-TFc"/>
                         </constraints>
                     </view>
@@ -275,6 +284,7 @@
                         <outlet property="cameraView" destination="LVi-fm-FkL" id="8ws-cX-ooP"/>
                         <outlet property="doubleTapRecognizer" destination="IcG-aj-iBc" id="Dbg-mU-HZR"/>
                         <outlet property="flashButton" destination="ZsK-Vu-Xdz" id="KhF-3C-DfZ"/>
+                        <outlet property="previewView" destination="cYA-5W-84V" id="wwf-Ue-F5C"/>
                         <outlet property="recordAnimationView" destination="vwd-CZ-KU1" id="rKm-2F-ozP"/>
                         <outlet property="tapRecognizer" destination="gRG-fq-RK8" id="bGE-JP-y2x"/>
                     </connections>
@@ -320,11 +330,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="veF-lQ-6VC" customClass="SCVideoPlayerView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="veF-lQ-6VC" customClass="MAGMediaPlayerView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XmC-9u-42S" customClass="SCSwipeableFilterView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XmC-9u-42S" customClass="MAGMediaFilterView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -954,4 +964,7 @@
         <image name="Triangle" width="21" height="16"/>
         <image name="Undo" width="15" height="18"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="euZ-yH-aPN"/>
+    </inferredMetricsTieBreakers>
 </document>
